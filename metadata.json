@@ -1,0 +1,8 @@
+{
+  "name": "SkillSwap: Student Peer Barter",
+  "description": "A decentralized peer-to-peer barter ecosystem for students to exchange technical and creative skills without monetary barriers, featuring AI-powered weighted matching and a reputation-based trust system.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
