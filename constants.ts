@@ -65,9 +65,13 @@ export const MOCK_USERS: UserProfile[] = [
     avatar: 'https://i.pravatar.cc/150?u=alex',
     linkedInUrl: 'https://linkedin.com/in/alexrivera',
     githubUrl: 'https://github.com/alexrivera',
+    instagramUrl: 'https://instagram.com/alex_dev',
+    education: [
+      { school: 'Tech State University', degree: 'B.S.', field: 'Computer Science', startYear: '2020', endYear: '2024' }
+    ],
     portfolio: [
       { title: 'TaskMaster Pro', description: 'A productivity app built with React and Firebase.', imageUrl: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=250&fit=crop' },
-      { title: 'DevFlow', description: 'Real-time collaborative code editor.', imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop' }
+      { title: 'DevFlow', description: 'Real-time collaborative code editor with WebSocket support.', imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop' }
     ]
   },
   {
@@ -89,9 +93,13 @@ export const MOCK_USERS: UserProfile[] = [
     totalSwaps: 10,
     avatar: 'https://i.pravatar.cc/150?u=sarah',
     linkedInUrl: 'https://linkedin.com/in/sarahchen',
+    instagramUrl: 'https://instagram.com/sarah_draws',
+    education: [
+      { school: 'Academy of Art', degree: 'M.F.A.', field: 'Visual Arts & UX Design', startYear: '2018', endYear: '2022' }
+    ],
     portfolio: [
-      { title: 'Brand Identity: EcoRoots', description: 'Complete branding package for a sustainable startup.', imageUrl: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=250&fit=crop' },
-      { title: 'Mobile App Concept', description: 'A health-tracking app UI/UX design.', imageUrl: 'https://images.unsplash.com/photo-1551288049-bbbda536639a?w=400&h=250&fit=crop' }
+      { title: 'Brand Identity: EcoRoots', description: 'Complete branding package for a sustainable startup focusing on organic materials.', imageUrl: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=250&fit=crop' },
+      { title: 'Mobile App Concept', description: 'A health-tracking app UI/UX design with dark mode support.', imageUrl: 'https://images.unsplash.com/photo-1551288049-bbbda536639a?w=400&h=250&fit=crop' }
     ]
   },
   {
@@ -101,7 +109,7 @@ export const MOCK_USERS: UserProfile[] = [
     university: 'Westside College',
     graduationYear: '2025',
     status: 'Student',
-    source: 'Discord',
+    source: 'Instagram',
     bio: 'Growth hacker in the making. Community building is my superpower.',
     offeredSkills: [
       { name: 'Digital Marketing', level: SkillLevel.ADVANCED, category: 'Marketing & Business' },
@@ -112,9 +120,12 @@ export const MOCK_USERS: UserProfile[] = [
     rating: 4.7,
     totalSwaps: 6,
     avatar: 'https://i.pravatar.cc/150?u=jordan',
-    githubUrl: 'https://github.com/jordansmith',
+    instagramUrl: 'https://instagram.com/jordan_marketing',
+    education: [
+      { school: 'Westside College', degree: 'B.A.', field: 'Marketing & Comm', startYear: '2021', endYear: '2025' }
+    ],
     portfolio: [
-      { title: 'SEO Case Study', description: 'How I increased traffic by 200% for a local non-profit.', imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop' }
+      { title: 'SEO Case Study', description: 'How I increased organic traffic by 200% for a local non-profit within 6 months.', imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop' }
     ]
   }
 ];

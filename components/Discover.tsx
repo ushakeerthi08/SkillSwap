@@ -15,7 +15,8 @@ const Discover: React.FC<DiscoverProps> = ({ onSelectUser }) => {
   const filteredUsers = useMemo(() => {
     return MOCK_USERS.filter(u => {
       const matchesSearch = u.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                           u.bio.toLowerCase().includes(searchTerm.toLowerCase());
+                           u.bio.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                           u.source.toLowerCase().includes(searchTerm.toLowerCase());
       const matchesSkill = !selectedSkill || 
                           u.offeredSkills.some(s => s.name === selectedSkill) ||
                           u.desiredSkills.includes(selectedSkill);
@@ -25,25 +26,51 @@ const Discover: React.FC<DiscoverProps> = ({ onSelectUser }) => {
 
   return (
     <div className="space-y-8 pb-12">
+      {/* Social Media Style Recommendations Bar */}
+      <section className="bg-white rounded-3xl p-6 shadow-sm border border-slate-200 overflow-hidden">
+        <h3 className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-4 px-2">Social Discoveries</h3>
+        <div className="flex gap-6 overflow-x-auto pb-4 no-scrollbar scroll-smooth px-2">
+           {MOCK_USERS.map(user => (
+             <button 
+                key={`suggested-${user.id}`}
+                onClick={() => onSelectUser(user)}
+                className="flex flex-col items-center gap-2 group min-w-[80px]"
+             >
+                <div className="relative">
+                  <div className="absolute inset-0 bg-gradient-to-tr from-amber-400 via-rose-500 to-indigo-600 rounded-full p-[2px] animate-pulse">
+                    <div className="bg-white rounded-full p-1">
+                      <img src={user.avatar} className="w-16 h-16 rounded-full object-cover grayscale-[0.2] group-hover:grayscale-0 transition-all" />
+                    </div>
+                  </div>
+                  <div className="absolute -bottom-1 -right-1 bg-white rounded-full p-1 shadow-md">
+                     <span className="text-[10px]">{user.source === 'Instagram' ? '📸' : user.source === 'GitHub' ? '💻' : user.source === 'LinkedIn' ? '💼' : '🤝'}</span>
+                  </div>
+                </div>
+                <span className="text-xs font-bold text-slate-700 truncate w-20 text-center">{user.name.split(' ')[0]}</span>
+             </button>
+           ))}
+        </div>
+      </section>
+
       {/* Header & Tabs */}
       <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8">
            <div>
-             <h1 className="text-3xl font-bold text-slate-800 mb-2 font-display">Discover Connections</h1>
-             <p className="text-slate-500">Find mentors from LinkedIn, GitHub, and collaborative groups.</p>
+             <h1 className="text-3xl font-black text-slate-800 mb-2 font-display">Expand Your Network</h1>
+             <p className="text-slate-500">Connect with peers across social platforms & interest groups.</p>
            </div>
            <div className="flex bg-slate-100 p-1 rounded-2xl">
               <button 
                 onClick={() => setView('people')}
                 className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${view === 'people' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
               >
-                People
+                Peer Matches
               </button>
               <button 
                 onClick={() => setView('groups')}
                 className={`px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${view === 'groups' ? 'bg-white text-indigo-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'}`}
               >
-                Interest Groups
+                Circles & Groups
               </button>
            </div>
         </div>
@@ -55,7 +82,7 @@ const Discover: React.FC<DiscoverProps> = ({ onSelectUser }) => {
             </svg>
             <input 
               type="text" 
-              placeholder={`Search ${view}...`} 
+              placeholder={`Search by name, skill, or source (Instagram, GitHub)...`} 
               className="w-full pl-12 pr-4 py-3.5 rounded-2xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all bg-slate-50/50"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
@@ -81,42 +108,36 @@ const Discover: React.FC<DiscoverProps> = ({ onSelectUser }) => {
           {filteredUsers.map(user => (
             <div 
               key={user.id} 
-              className="bg-white rounded-3xl overflow-hidden border border-slate-200 hover:border-indigo-300 hover:shadow-2xl transition-all cursor-pointer group flex flex-col"
+              className="bg-white rounded-[2rem] overflow-hidden border border-slate-200 hover:border-indigo-300 hover:shadow-2xl transition-all cursor-pointer group flex flex-col"
               onClick={() => onSelectUser(user)}
             >
-              <div className="h-28 bg-gradient-to-br from-indigo-50 via-slate-50 to-violet-50 relative">
+              <div className="h-32 bg-gradient-to-br from-indigo-50 to-white relative">
                  <div className="absolute top-4 left-4">
-                    <span className="bg-white/90 backdrop-blur shadow-sm px-2 py-1 rounded-lg text-[10px] font-bold text-slate-600 flex items-center gap-1.5 border border-slate-100">
-                      {user.source === 'LinkedIn' && <span className="text-blue-600">in</span>}
-                      {user.source === 'GitHub' && <span className="text-black">git</span>}
-                      {user.source === 'Discord' && <span className="text-indigo-400">dc</span>}
-                      {user.source}
-                    </span>
-                 </div>
-                 <div className="absolute top-4 right-4">
-                    <span className={`px-2 py-1 rounded-lg text-[10px] font-black uppercase ${user.status === 'Professional' ? 'bg-indigo-600 text-white' : 'bg-white text-indigo-600 border border-indigo-100 shadow-sm'}`}>
-                      {user.status}
+                    <span className={`bg-white/95 backdrop-blur shadow-sm px-3 py-1.5 rounded-xl text-[10px] font-black flex items-center gap-2 border border-slate-100 ${user.source === 'Instagram' ? 'text-rose-500' : user.source === 'GitHub' ? 'text-slate-900' : 'text-indigo-600'}`}>
+                      {user.source === 'Instagram' && <span>📸</span>}
+                      {user.source === 'GitHub' && <span>💻</span>}
+                      {user.source === 'LinkedIn' && <span>💼</span>}
+                      {user.source === 'Discord' && <span>💬</span>}
+                      {user.source.toUpperCase()}
                     </span>
                  </div>
                  <img 
                    src={user.avatar} 
                    alt={user.name} 
-                   className="absolute bottom-0 left-6 translate-y-1/2 w-16 h-16 rounded-2xl border-4 border-white shadow-xl bg-white object-cover"
+                   className="absolute bottom-0 left-8 translate-y-1/2 w-20 h-20 rounded-3xl border-4 border-white shadow-2xl bg-white object-cover group-hover:scale-105 transition-transform"
                  />
               </div>
-              <div className="pt-10 p-6 flex-grow">
-                <h3 className="text-lg font-bold text-slate-800 mb-0.5">{user.name}</h3>
-                <p className="text-[10px] text-indigo-500 font-bold mb-3 uppercase tracking-wider">{user.major}</p>
-                <p className="text-sm text-slate-600 line-clamp-2 mb-6 h-10 leading-relaxed">{user.bio}</p>
+              <div className="pt-12 p-8 flex-grow">
+                <h3 className="text-xl font-black text-slate-800 mb-1">{user.name}</h3>
+                <p className="text-xs text-indigo-600 font-bold mb-4">{user.major}</p>
+                <p className="text-sm text-slate-500 line-clamp-2 leading-relaxed mb-6">{user.bio}</p>
                 
                 <div className="space-y-4">
                   <div>
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                       <span className="w-4 h-[1px] bg-slate-200"></span> Offers
-                    </p>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Core Skills</p>
                     <div className="flex flex-wrap gap-1.5">
                       {user.offeredSkills.map(s => (
-                        <span key={s.name} className="px-2 py-1 bg-emerald-50 text-emerald-700 rounded-md text-[10px] font-bold border border-emerald-100">
+                        <span key={s.name} className="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-[10px] font-bold border border-indigo-100">
                           {s.name}
                         </span>
                       ))}
@@ -124,14 +145,16 @@ const Discover: React.FC<DiscoverProps> = ({ onSelectUser }) => {
                   </div>
                 </div>
               </div>
-              <div className="p-4 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center group-hover:bg-indigo-50/30 transition-colors">
-                <div className="flex items-center gap-1.5">
-                  <span className="text-amber-400 text-sm">★</span>
-                  <span className="text-xs font-bold text-slate-700">{user.rating}</span>
+              <div className="p-6 bg-slate-50/50 border-t border-slate-100 flex justify-between items-center group-hover:bg-indigo-50/20">
+                <div className="flex items-center gap-2">
+                  <div className="bg-amber-100 text-amber-600 p-1.5 rounded-lg">
+                    <span className="text-xs font-black">★ {user.rating}</span>
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                   {user.linkedInUrl && <div className="p-1.5 bg-white border border-slate-200 rounded-lg text-slate-400"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.238 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></div>}
-                   {user.githubUrl && <div className="p-1.5 bg-white border border-slate-200 rounded-lg text-slate-400"><svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></div>}
+                <div className="flex gap-1.5">
+                   <div className="w-8 h-8 bg-white border border-slate-200 rounded-xl flex items-center justify-center text-slate-400 hover:text-indigo-600 transition-colors">
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                   </div>
                 </div>
               </div>
             </div>
@@ -140,43 +163,33 @@ const Discover: React.FC<DiscoverProps> = ({ onSelectUser }) => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
            {MOCK_GROUPS.map(group => (
-             <div key={group.id} className="bg-white rounded-[2rem] overflow-hidden border border-slate-200 hover:shadow-2xl hover:-translate-y-1 transition-all group flex flex-col">
-                <div className="h-48 relative overflow-hidden">
-                   <img src={group.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/20 to-transparent"></div>
-                   <div className="absolute bottom-6 left-6 right-6 flex justify-between items-end">
-                      <div className="flex flex-wrap gap-2">
+             <div key={group.id} className="bg-white rounded-[2.5rem] overflow-hidden border border-slate-200 hover:shadow-2xl transition-all group flex flex-col">
+                <div className="h-56 relative overflow-hidden">
+                   <img src={group.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
+                   <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 to-transparent"></div>
+                   <div className="absolute bottom-6 left-8 flex flex-wrap gap-2">
                         {group.tags.map(tag => (
-                          <span key={tag} className="bg-white/10 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-lg border border-white/20">#{tag}</span>
+                          <span key={tag} className="bg-white/20 backdrop-blur-md text-white text-[10px] font-bold px-3 py-1 rounded-full border border-white/20 uppercase tracking-tighter">#{tag}</span>
                         ))}
-                      </div>
                    </div>
                 </div>
                 <div className="p-8 flex-grow">
-                   <h3 className="text-xl font-bold text-slate-800 mb-3">{group.name}</h3>
-                   <p className="text-slate-500 text-sm leading-relaxed mb-6">{group.description}</p>
-                   <div className="flex items-center gap-3">
+                   <h3 className="text-2xl font-black text-slate-800 mb-3">{group.name}</h3>
+                   <p className="text-slate-500 text-sm leading-relaxed mb-8">{group.description}</p>
+                   <div className="flex items-center justify-between">
                       <div className="flex -space-x-3">
-                        {[1,2,3,4].map(i => <img key={i} src={`https://i.pravatar.cc/100?u=${i+10}`} className="w-8 h-8 rounded-full border-2 border-white" />)}
+                        {[1,2,3,4].map(i => <img key={i} src={`https://i.pravatar.cc/100?u=${i+20}`} className="w-10 h-10 rounded-full border-4 border-white" />)}
                       </div>
-                      <span className="text-xs font-bold text-slate-400">+{group.memberCount} members</span>
+                      <span className="text-xs font-black text-indigo-600 bg-indigo-50 px-3 py-1.5 rounded-xl">{group.memberCount.toLocaleString()} Peers</span>
                    </div>
                 </div>
                 <div className="px-8 pb-8">
-                   <button className="w-full py-3.5 bg-slate-900 text-white rounded-2xl font-bold hover:bg-indigo-600 transition-colors shadow-xl shadow-slate-200">
-                     Join Group
+                   <button className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black hover:bg-indigo-600 transition-all shadow-xl shadow-slate-200 active:scale-95">
+                     Join Circle
                    </button>
                 </div>
              </div>
            ))}
-        </div>
-      )}
-
-      {filteredUsers.length === 0 && (
-        <div className="py-24 text-center">
-           <div className="text-5xl mb-4">🛸</div>
-           <h3 className="text-xl font-bold text-slate-800">No matches found</h3>
-           <p className="text-slate-500 max-w-sm mx-auto">Try adjusting your skill filters or broadening your search terms.</p>
         </div>
       )}
     </div>

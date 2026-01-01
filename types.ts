@@ -19,7 +19,15 @@ export interface PortfolioItem {
   imageUrl?: string;
 }
 
-export type SocialSource = 'LinkedIn' | 'GitHub' | 'Discord' | 'SkillSwap Native';
+export interface Education {
+  school: string;
+  degree: string;
+  field: string;
+  startYear: string;
+  endYear: string;
+}
+
+export type SocialSource = 'LinkedIn' | 'GitHub' | 'Discord' | 'Instagram' | 'SkillSwap Native';
 
 export interface UserProfile {
   id: string;
@@ -38,7 +46,9 @@ export interface UserProfile {
   avatar: string;
   linkedInUrl?: string;
   githubUrl?: string;
+  instagramUrl?: string;
   portfolio: PortfolioItem[];
+  education: Education[];
 }
 
 export interface Group {
