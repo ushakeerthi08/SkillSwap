@@ -10,6 +10,8 @@ export interface Skill {
   name: string;
   level: SkillLevel;
   category: string;
+  isVerified?: boolean;
+  endorsements?: number;
 }
 
 export interface PortfolioItem {
@@ -17,6 +19,8 @@ export interface PortfolioItem {
   description: string;
   link?: string;
   imageUrl?: string;
+  date?: string;
+  tags?: string[];
 }
 
 export interface Education {
@@ -25,6 +29,27 @@ export interface Education {
   field: string;
   startYear: string;
   endYear: string;
+}
+
+export interface ProjectBrief {
+  id: string;
+  title: string;
+  description: string;
+  ownerId: string;
+  neededSkills: string[];
+  status: 'open' | 'in-progress' | 'completed';
+  category: string;
+  image?: string;
+}
+
+// Added Group interface to resolve export errors in constants.ts and components/Discover.tsx
+export interface Group {
+  id: string;
+  name: string;
+  description: string;
+  memberCount: number;
+  tags: string[];
+  image: string;
 }
 
 export type SocialSource = 'LinkedIn' | 'GitHub' | 'Discord' | 'Instagram' | 'SkillSwap Native';
@@ -40,7 +65,7 @@ export interface UserProfile {
   bio: string;
   offeredSkills: Skill[];
   desiredSkills: string[];
-  credits: number;
+  credits: number; // Current balance
   rating: number;
   totalSwaps: number;
   avatar: string;
@@ -49,15 +74,9 @@ export interface UserProfile {
   instagramUrl?: string;
   portfolio: PortfolioItem[];
   education: Education[];
-}
-
-export interface Group {
-  id: string;
-  name: string;
-  description: string;
-  memberCount: number;
-  tags: string[];
-  image: string;
+  isAmbassador?: boolean;
+  isFacultyEndorsed?: boolean;
+  activeProjects?: string[]; // IDs of projects
 }
 
 export interface SkillMatch {
@@ -65,4 +84,10 @@ export interface SkillMatch {
   matchScore: number;
   matchReason: string;
   commonGround: string[];
+}
+
+export interface LearningPathStep {
+  title: string;
+  description: string;
+  suggestedMentorId?: string;
 }
