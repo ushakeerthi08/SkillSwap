@@ -14,7 +14,8 @@ export const AVAILABLE_SKILLS = [
   'React', 'Node.js', 'Python', 'UI/UX Design', 'Figma', 'Video Editing', 
   'Digital Marketing', 'Data Structures', 'Public Speaking', 'Spanish', 
   'Photography', 'Business Strategy', 'Content Writing', 'Java', 'Machine Learning',
-  'Graphic Design', 'Project Management', 'Financial Modeling'
+  'Graphic Design', 'Project Management', 'Financial Modeling', 'Web Designing', 
+  'App Developer', 'Designer', 'Content Creation'
 ];
 
 export const MOCK_PROJECTS: ProjectBrief[] = [
@@ -50,36 +51,32 @@ export const MOCK_USERS: UserProfile[] = [
     status: 'Student',
     source: 'GitHub',
     isAmbassador: true,
-    bio: 'Passionate about full-stack development and open source. Building the next gen of dev tools. I serve as a Student Ambassador to help freshmen get into web dev.',
+    bio: 'Passionate about full-stack development and open source. Building the next gen of dev tools.',
     offeredSkills: [
       { name: 'React', level: SkillLevel.ADVANCED, category: 'Software Development', isVerified: true, endorsements: 24 },
-      { name: 'Node.js', level: SkillLevel.INTERMEDIATE, category: 'Software Development', isVerified: true, endorsements: 12 }
+      { name: 'Node.js', level: SkillLevel.INTERMEDIATE, category: 'Software Development', isVerified: true, endorsements: 12 },
+      { name: 'Java', level: SkillLevel.ADVANCED, category: 'Software Development', isVerified: true }
     ],
-    desiredSkills: ['UI/UX Design', 'Figma'],
+    desiredSkills: ['UI/UX Design', 'Figma', 'Photography'],
     credits: 12,
     rating: 4.9,
     totalSwaps: 15,
     avatar: 'https://i.pravatar.cc/150?u=alex',
+    githubUrl: 'https://github.com/arivera-dev',
     linkedInUrl: 'https://linkedin.com/in/alexrivera',
-    githubUrl: 'https://github.com/alexrivera',
-    instagramUrl: 'https://instagram.com/alex_dev',
     education: [
-      { school: 'Tech State University', degree: 'B.S.', field: 'Computer Science', startYear: '2020', endYear: '2024' }
+      { school: 'Tech State University', degree: 'Bachelor of Science', field: 'Computer Science', startYear: '2020', endYear: '2024' }
     ],
     portfolio: [
-      { 
-        title: 'TaskMaster Pro', 
-        description: 'A productivity app built with React and Firebase. Featured in the University App Showcase.', 
-        imageUrl: 'https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=400&h=250&fit=crop',
-        tags: ['React', 'Firebase', 'SAAS']
-      },
-      { 
-        title: 'DevFlow', 
-        description: 'Real-time collaborative code editor with WebSocket support. Used by 50+ students in my cohort.', 
-        imageUrl: 'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=250&fit=crop',
-        tags: ['WebSockets', 'Node.js']
-      }
-    ]
+      { title: 'OS Kernel Mod', description: 'Contributor to a custom Linux kernel optimization project.', imageUrl: 'https://images.unsplash.com/photo-1518433278993-0a7df1849bc2?w=400&h=250&fit=crop', tags: ['C++', 'Kernel'] }
+    ],
+    timeSpentTotal: 45,
+    courseBreakdown: [
+      { skillName: 'React', hours: 25, color: 'bg-blue-500' },
+      { skillName: 'Java', hours: 20, color: 'bg-orange-500' }
+    ],
+    activityHistory: [],
+    notifications: []
   },
   {
     id: '2',
@@ -90,65 +87,94 @@ export const MOCK_USERS: UserProfile[] = [
     status: 'Professional',
     source: 'LinkedIn',
     isFacultyEndorsed: true,
-    bio: 'Digital illustrator and UX enthusiast working as a Junior Designer. Passionate about color theory. Endorsed by Professor Miller for Design Systems.',
+    bio: 'Digital illustrator and UX enthusiast. I love teaching Figma and color theory to developers.',
     offeredSkills: [
       { name: 'Figma', level: SkillLevel.EXPERT, category: 'Design & Creative', isVerified: true, endorsements: 45 },
-      { name: 'Graphic Design', level: SkillLevel.ADVANCED, category: 'Design & Creative', isVerified: true, endorsements: 31 }
+      { name: 'Graphic Design', level: SkillLevel.ADVANCED, category: 'Design & Creative', isVerified: true },
+      { name: 'Designer', level: SkillLevel.EXPERT, category: 'Design & Creative' }
     ],
-    desiredSkills: ['React', 'Web Development'],
+    desiredSkills: ['React', 'Web Designing'],
     credits: 8,
     rating: 4.8,
     totalSwaps: 10,
     avatar: 'https://i.pravatar.cc/150?u=sarah',
-    linkedInUrl: 'https://linkedin.com/in/sarahchen',
-    instagramUrl: 'https://instagram.com/sarah_draws',
+    linkedInUrl: 'https://linkedin.com/in/schen-art',
+    instagramUrl: 'https://instagram.com/sarahchen_pixels',
     education: [
-      { school: 'Academy of Art', degree: 'M.F.A.', field: 'Visual Arts & UX Design', startYear: '2018', endYear: '2022' }
+      { school: 'Academy of Art', degree: 'Master of Fine Arts', field: 'Digital Media', startYear: '2018', endYear: '2022' }
     ],
     portfolio: [
-      { 
-        title: 'Brand Identity: EcoRoots', 
-        description: 'Complete branding package for a sustainable startup focusing on organic materials.', 
-        imageUrl: 'https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=250&fit=crop',
-        tags: ['Branding', 'Vector Art']
-      },
-      { 
-        title: 'Mobile App Concept', 
-        description: 'A health-tracking app UI/UX design with dark mode support. Case study published on Medium.', 
-        imageUrl: 'https://images.unsplash.com/photo-1551288049-bbbda536639a?w=400&h=250&fit=crop',
-        tags: ['UX Case Study', 'Mobile']
-      }
-    ]
+      { title: 'EcoRoots Branding', description: 'Brand identity for a sustainable farming collective.', imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop', tags: ['Branding', 'Figma'] }
+    ],
+    timeSpentTotal: 30,
+    courseBreakdown: [
+      { skillName: 'Figma', hours: 20, color: 'bg-purple-500' },
+      { skillName: 'Graphic Design', hours: 10, color: 'bg-pink-500' }
+    ],
+    activityHistory: [],
+    notifications: []
   },
   {
     id: '3',
-    name: 'Prof. David Vance',
-    major: 'Applied Mathematics',
-    university: 'Central University',
-    status: 'Professional',
-    source: 'SkillSwap Native',
-    isFacultyEndorsed: true,
-    bio: 'Department Head and Lead Tutor. Offering advanced math coaching in exchange for basic tech automation help for the lab.',
+    name: 'Marcus Thorne',
+    major: 'Marketing',
+    university: 'Global Business School',
+    status: 'Student',
+    source: 'Instagram',
+    bio: 'Content creator and social media strategist. I can help you build your personal brand.',
     offeredSkills: [
-      { name: 'Linear Algebra', level: SkillLevel.EXPERT, category: 'Academics & Science', isVerified: true, endorsements: 120 },
-      { name: 'Calculus', level: SkillLevel.EXPERT, category: 'Academics & Science', isVerified: true, endorsements: 95 }
+      { name: 'Content Creation', level: SkillLevel.ADVANCED, category: 'Marketing & Business', isVerified: true },
+      { name: 'Photography', level: SkillLevel.INTERMEDIATE, category: 'Design & Creative' }
     ],
-    desiredSkills: ['Python Automation', 'Data Visualization'],
-    credits: 50,
-    rating: 5.0,
-    totalSwaps: 89,
-    avatar: 'https://i.pravatar.cc/150?u=prof_vance',
+    desiredSkills: ['Video Editing', 'App Developer'],
+    credits: 22,
+    rating: 4.7,
+    totalSwaps: 5,
+    avatar: 'https://i.pravatar.cc/150?u=marcus',
+    instagramUrl: 'https://instagram.com/marcusthorne_vlogs',
     education: [
-      { school: 'MIT', degree: 'Ph.D.', field: 'Applied Mathematics', startYear: '2010', endYear: '2015' }
+      { school: 'Global Business School', degree: 'BBA', field: 'Marketing', startYear: '2021', endYear: '2025' }
+    ],
+    portfolio: [],
+    timeSpentTotal: 12,
+    courseBreakdown: [
+      { skillName: 'Content Creation', hours: 8, color: 'bg-rose-500' },
+      { skillName: 'Photography', hours: 4, color: 'bg-teal-500' }
+    ],
+    activityHistory: [],
+    notifications: []
+  },
+  {
+    id: '4',
+    name: 'Elena Rodriguez',
+    major: 'Software Engineering',
+    university: 'Tech State University',
+    status: 'Student',
+    source: 'GitHub',
+    bio: 'Mobile-first developer. I build iOS and Android apps using React Native.',
+    offeredSkills: [
+      { name: 'App Developer', level: SkillLevel.ADVANCED, category: 'Software Development', isVerified: true },
+      { name: 'Web Designing', level: SkillLevel.INTERMEDIATE, category: 'Software Development' }
+    ],
+    desiredSkills: ['Java', 'UI/UX Design'],
+    credits: 15,
+    rating: 4.9,
+    totalSwaps: 12,
+    avatar: 'https://i.pravatar.cc/150?u=elena',
+    githubUrl: 'https://github.com/elena-codes',
+    education: [
+      { school: 'Tech State University', degree: 'B.S.', field: 'Software Engineering', startYear: '2022', endYear: '2026' }
     ],
     portfolio: [
-      { 
-        title: 'Geometric Theory Paper', 
-        description: 'Research into non-Euclidean spaces.', 
-        imageUrl: 'https://images.unsplash.com/photo-1509228468518-180dd4864904?w=400&h=250&fit=crop',
-        tags: ['Academic', 'Math']
-      }
-    ]
+      { title: 'FitPulse App', description: 'A mobile fitness tracker with social features.', imageUrl: 'https://images.unsplash.com/photo-1510070112810-d4e9a46d9e91?w=400&h=250&fit=crop', tags: ['React Native', 'Mobile'] }
+    ],
+    timeSpentTotal: 40,
+    courseBreakdown: [
+      { skillName: 'App Development', hours: 30, color: 'bg-indigo-500' },
+      { skillName: 'Web Design', hours: 10, color: 'bg-blue-400' }
+    ],
+    activityHistory: [],
+    notifications: []
   }
 ];
 
@@ -156,17 +182,9 @@ export const MOCK_GROUPS: Group[] = [
   {
     id: 'g1',
     name: 'Open Source Pioneers',
-    description: 'A hub for students contributing to major OS projects. Python, Rust, and Go lovers welcome.',
+    description: 'A hub for students contributing to major OS projects.',
     memberCount: 1240,
-    tags: ['GitHub', 'Backend', 'Collaboration'],
+    tags: ['GitHub', 'Backend'],
     image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=250&fit=crop'
-  },
-  {
-    id: 'g2',
-    name: 'Product Design Circle',
-    description: 'Weekly Figma challenges and UI/UX critiques for aspiring product designers.',
-    memberCount: 850,
-    tags: ['Figma', 'UX', 'Aesthetics'],
-    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&h=250&fit=crop'
   }
 ];

@@ -16,7 +16,7 @@ export const getSmartMatches = async (
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: `
-        Analyze the relationship between this user and a pool of potential skill-swapping partners.
+        Analyze the relationship between this user and a pool of potential skill-swapping partners in a peer-to-peer barter ecosystem.
         
         Current User:
         Offered: ${JSON.stringify(currentUser.offeredSkills)}
@@ -30,7 +30,8 @@ export const getSmartMatches = async (
           desired: p.desiredSkills
         })))}
 
-        Task: Rank the users in the pool based on how well their offered skills match the current user's desired skills, AND how well the current user's offered skills match their desired skills.
+        Task: Rank the peers in the pool based on reciprocal value. 
+        How well their offered skills match the current user's desired skills, AND how well the current user's offered skills match their desired skills.
         Provide a match score (0-100), a concise 'matchReason' (why this swap is valuable), and 'commonGround' (list of shared interests or overlapping technical domains).
       `,
       config: {
@@ -89,9 +90,9 @@ export const generateLearningPath = async (
         Student Desires: ${currentUser.desiredSkills.join(', ')}
         Student Currently Knows: ${currentUser.offeredSkills.map(s => s.name).join(', ')}
         
-        Available Mentors: ${JSON.stringify(poolData)}
+        Available Peers (Potential Partners): ${JSON.stringify(poolData)}
         
-        Break it down into 3-4 clear logical steps. For each step, suggest an "intermediate" skill if needed, and pick the best mentor from the list if they offer that skill.
+        Break it down into 3-4 clear logical steps for a collaborative exchange. For each step, suggest an "intermediate" skill if needed, and pick the best peer partner from the list who can help them achieve that goal.
       `,
       config: {
         responseMimeType: "application/json",
@@ -102,7 +103,7 @@ export const generateLearningPath = async (
             properties: {
               title: { type: Type.STRING },
               description: { type: Type.STRING },
-              suggestedMentorId: { type: Type.STRING }
+              suggestedUserId: { type: Type.STRING }
             },
             required: ["title", "description"]
           }
@@ -121,7 +122,7 @@ export const generateBioImprovement = async (bio: string, skills: string[]): Pro
   try {
     const response = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
-      contents: `Suggest a more professional and engaging bio based on these skills: ${skills.join(', ')}. Current bio: "${bio}"`,
+      contents: `Suggest a more professional and engaging bio for a skill-sharing platform based on these skills: ${skills.join(', ')}. Current bio: "${bio}"`,
     });
     return response.text || bio;
   } catch (e) {

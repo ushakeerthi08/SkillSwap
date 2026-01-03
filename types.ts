@@ -42,7 +42,6 @@ export interface ProjectBrief {
   image?: string;
 }
 
-// Added Group interface to resolve export errors in constants.ts and components/Discover.tsx
 export interface Group {
   id: string;
   name: string;
@@ -53,6 +52,30 @@ export interface Group {
 }
 
 export type SocialSource = 'LinkedIn' | 'GitHub' | 'Discord' | 'Instagram' | 'SkillSwap Native';
+
+export interface UserActivity {
+  id: string;
+  type: 'swap_completed' | 'project_joined' | 'skill_verified' | 'credit_earned';
+  title: string;
+  timestamp: string;
+  meta?: string;
+}
+
+export interface CourseTime {
+  skillName: string;
+  hours: number;
+  color: string;
+}
+
+export interface SwapNotification {
+  id: string;
+  from: string;
+  avatar: string;
+  message: string;
+  time: string;
+  isRead: boolean;
+  type: 'request' | 'message' | 'rating';
+}
 
 export interface UserProfile {
   id: string;
@@ -65,7 +88,7 @@ export interface UserProfile {
   bio: string;
   offeredSkills: Skill[];
   desiredSkills: string[];
-  credits: number; // Current balance
+  credits: number; 
   rating: number;
   totalSwaps: number;
   avatar: string;
@@ -76,7 +99,13 @@ export interface UserProfile {
   education: Education[];
   isAmbassador?: boolean;
   isFacultyEndorsed?: boolean;
-  activeProjects?: string[]; // IDs of projects
+  activeProjects?: string[]; 
+  
+  // Tracking fields
+  timeSpentTotal: number; // in hours
+  courseBreakdown: CourseTime[];
+  activityHistory: UserActivity[];
+  notifications: SwapNotification[];
 }
 
 export interface SkillMatch {
@@ -89,5 +118,5 @@ export interface SkillMatch {
 export interface LearningPathStep {
   title: string;
   description: string;
-  suggestedMentorId?: string;
+  suggestedUserId?: string;
 }

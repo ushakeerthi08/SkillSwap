@@ -33,39 +33,38 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectUser }) => {
     fetchData();
   }, [user]);
 
-  const ambassadors = MOCK_USERS.filter(u => u.isAmbassador || u.isFacultyEndorsed);
+  const highRatedPeers = MOCK_USERS.filter(u => u.id !== user.id).sort((a, b) => b.rating - a.rating).slice(0, 3);
 
   return (
     <div className="space-y-16 animate-in fade-in duration-500 pb-32">
       {/* Wallet / Credit Header */}
-      <section className="bg-white border-2 border-indigo-50 rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
+      <section className="bg-white border-2 border-teal-50 rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-sm">
         <div className="flex items-center gap-6">
           <div className="w-20 h-20 bg-emerald-100 rounded-[1.5rem] flex items-center justify-center text-3xl shadow-inner">⚡</div>
           <div>
             <h2 className="text-2xl font-black text-slate-800">Time-Banking Wallet</h2>
-            <p className="text-slate-500 font-medium">You have <span className="text-emerald-600 font-bold">{user.credits} Skill Credits</span> available.</p>
+            <p className="text-slate-500 font-medium">You have <span className="text-emerald-600 font-bold">{user.credits} Skill Credits</span> available for exchange.</p>
           </div>
         </div>
         <div className="flex gap-4">
-          <div className="bg-slate-50 px-6 py-4 rounded-2xl border border-slate-100 text-center">
-             <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Lifetime Earned</p>
-             <p className="text-xl font-black text-slate-800">42 hrs</p>
-          </div>
-          <div className="bg-indigo-600 px-8 py-4 rounded-2xl text-white shadow-xl shadow-indigo-100 font-black cursor-pointer hover:bg-indigo-700 transition-all">
-            Find Mentors
-          </div>
+          <button 
+            onClick={() => {}} 
+            className="bg-teal-600 px-8 py-4 rounded-2xl text-white shadow-xl shadow-teal-100 font-black cursor-pointer hover:bg-teal-700 transition-all active:scale-95"
+          >
+            Explore Partners
+          </button>
         </div>
       </section>
 
       {/* AI Learning Path */}
-      <section className="bg-indigo-950 rounded-[3rem] p-12 text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/20 blur-[100px] rounded-full"></div>
+      <section className="bg-slate-900 rounded-[3rem] p-12 text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/20 blur-[100px] rounded-full"></div>
         <div className="relative z-10">
           <div className="flex items-center gap-4 mb-10">
             <span className="p-3 bg-white/10 rounded-2xl border border-white/20">
-               <svg className="w-6 h-6 text-indigo-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+               <svg className="w-6 h-6 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             </span>
-            <h2 className="text-4xl font-black">Your AI Learning Path</h2>
+            <h2 className="text-4xl font-black">Your AI Exchange Path</h2>
           </div>
 
           {isLoading ? (
@@ -76,14 +75,14 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectUser }) => {
             <div className="grid md:grid-cols-3 gap-8">
               {learningPath.map((step, idx) => (
                 <div key={idx} className="bg-white/5 border border-white/10 p-8 rounded-[2rem] hover:bg-white/10 transition-all group">
-                   <div className="w-10 h-10 bg-indigo-500 text-white rounded-xl flex items-center justify-center font-black mb-6 shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
+                   <div className="w-10 h-10 bg-teal-500 text-white rounded-xl flex items-center justify-center font-black mb-6 shadow-lg shadow-teal-500/20 group-hover:scale-110 transition-transform">
                       {idx + 1}
                    </div>
                    <h3 className="text-xl font-black mb-3">{step.title}</h3>
-                   <p className="text-indigo-200/70 text-sm leading-relaxed mb-6">{step.description}</p>
-                   {step.suggestedMentorId && (
-                     <button className="text-xs font-black text-indigo-300 flex items-center gap-2 group-hover:underline">
-                        Suggested Mentor found →
+                   <p className="text-teal-200/70 text-sm leading-relaxed mb-6">{step.description}</p>
+                   {step.suggestedUserId && (
+                     <button className="text-xs font-black text-teal-300 flex items-center gap-2 group-hover:underline">
+                        Partner match found →
                      </button>
                    )}
                 </div>
@@ -93,14 +92,14 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectUser }) => {
         </div>
       </section>
 
-      {/* Project Hub (Collaborative Learning) */}
+      {/* Project Hub */}
       <section>
         <div className="flex justify-between items-end mb-10 px-4">
           <div>
             <h2 className="text-4xl font-black text-slate-800 mb-3">Project Hub</h2>
-            <p className="text-slate-500 font-medium">Swap skills while building something real. Projects are the ultimate proof of work.</p>
+            <p className="text-slate-500 font-medium">Swap skills while building something real. Every project is a shared win.</p>
           </div>
-          <button className="px-6 py-3 border-2 border-slate-200 rounded-2xl font-black text-sm hover:border-indigo-600 transition-all">Create Project</button>
+          <button className="px-6 py-3 border-2 border-slate-200 rounded-2xl font-black text-sm hover:border-teal-600 transition-all">Start Project</button>
         </div>
         <div className="grid md:grid-cols-2 gap-10">
            {MOCK_PROJECTS.map(project => (
@@ -116,13 +115,13 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectUser }) => {
                    <h3 className="text-2xl font-black text-slate-800 mb-4">{project.title}</h3>
                    <p className="text-slate-500 text-sm leading-relaxed mb-8 line-clamp-3">{project.description}</p>
                    <div className="space-y-4 mt-auto">
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Needed to join</p>
+                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Collaborators Need</p>
                       <div className="flex flex-wrap gap-2">
                         {project.neededSkills.map(s => (
                           <span key={s} className="px-3 py-1 bg-rose-50 text-rose-600 rounded-xl text-[10px] font-black border border-rose-100">{s}</span>
                         ))}
                       </div>
-                      <button className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-sm mt-4 hover:bg-indigo-600 transition-all shadow-xl shadow-slate-200">Request to Join</button>
+                      <button className="w-full py-4 bg-slate-900 text-white rounded-2xl font-black text-sm mt-4 hover:bg-teal-600 transition-all shadow-xl shadow-slate-200">Request Collaboration</button>
                    </div>
                 </div>
              </div>
@@ -130,48 +129,47 @@ const Dashboard: React.FC<DashboardProps> = ({ user, onSelectUser }) => {
         </div>
       </section>
 
-      {/* Verified Mentors (Cold Start Fix) */}
+      {/* Verified Peer Network */}
       <section className="bg-white border border-slate-200 rounded-[3rem] p-12">
          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-12">
             <div>
-              <h2 className="text-4xl font-black text-slate-800 mb-2">Ambassador Network</h2>
-              <p className="text-slate-500 font-medium text-lg">Trust matters. These mentors are verified through Faculty or Peer Reviews.</p>
+              <h2 className="text-4xl font-black text-slate-800 mb-2">High-Rated Partners</h2>
+              <p className="text-slate-500 font-medium text-lg">Trust is our currency. Connect with peers who have consistently high feedback.</p>
             </div>
-            <button className="px-8 py-4 bg-indigo-600 text-white rounded-[1.5rem] font-black text-sm hover:bg-indigo-700 transition-all shadow-2xl shadow-indigo-100">Browse All Ambassadors</button>
+            <button className="px-8 py-4 bg-teal-600 text-white rounded-[1.5rem] font-black text-sm hover:bg-teal-700 transition-all shadow-2xl shadow-teal-100">View All Peers</button>
          </div>
          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {ambassadors.map(mentor => (
-              <div key={mentor.id} className="group bg-slate-50 rounded-[3rem] p-10 border border-slate-100 hover:border-indigo-300 hover:bg-white transition-all shadow-sm hover:shadow-xl">
+            {highRatedPeers.map(peer => (
+              <div key={peer.id} className="group bg-slate-50 rounded-[3rem] p-10 border border-slate-100 hover:border-teal-300 hover:bg-white transition-all shadow-sm hover:shadow-xl">
                  <div className="flex items-center gap-6 mb-8">
                     <div className="relative">
-                      <img src={mentor.avatar} className="w-20 h-20 rounded-[1.5rem] border-4 border-white shadow-xl object-cover" />
-                      {mentor.isFacultyEndorsed && (
-                        <div className="absolute -top-3 -right-3 bg-indigo-600 text-white p-2 rounded-xl shadow-xl">
+                      <img src={peer.avatar} className="w-20 h-20 rounded-[1.5rem] border-4 border-white shadow-xl object-cover" />
+                      {peer.isAmbassador && (
+                        <div className="absolute -top-3 -right-3 bg-teal-600 text-white p-2 rounded-xl shadow-xl">
                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                         </div>
                       )}
                     </div>
                     <div>
-                      <h4 className="text-xl font-black text-slate-800">{mentor.name}</h4>
+                      <h4 className="text-xl font-black text-slate-800">{peer.name}</h4>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-black text-indigo-500 uppercase tracking-tighter">{mentor.isFacultyEndorsed ? 'Faculty Endorsed' : 'Ambassador'}</span>
-                        <span className="text-amber-500 text-xs font-black">★ {mentor.rating}</span>
+                        <span className="text-xs font-black text-teal-500 uppercase tracking-tighter">{peer.source}</span>
+                        <span className="text-amber-500 text-xs font-black">★ {peer.rating}</span>
                       </div>
                     </div>
                  </div>
                  <div className="space-y-4 mb-10">
-                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Endorsed Skills</p>
+                    <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Value they bring</p>
                     <div className="flex flex-wrap gap-2">
-                      {mentor.offeredSkills.map(s => (
+                      {peer.offeredSkills.slice(0, 3).map(s => (
                         <div key={s.name} className="flex items-center gap-2 bg-white border border-slate-200 rounded-xl px-3 py-1.5 shadow-sm">
                           <span className="text-[10px] font-black text-slate-600">{s.name}</span>
                           {s.isVerified && <span className="text-emerald-500 font-bold text-xs">✓</span>}
-                          {s.endorsements && <span className="text-[9px] text-slate-400 font-bold ml-1">{s.endorsements}</span>}
                         </div>
                       ))}
                     </div>
                  </div>
-                 <button onClick={() => onSelectUser(mentor)} className="w-full py-4 bg-white border-2 border-slate-200 rounded-2xl font-black text-sm group-hover:bg-indigo-600 group-hover:text-white group-hover:border-indigo-600 transition-all shadow-sm">Start Swap Session</button>
+                 <button onClick={() => onSelectUser(peer)} className="w-full py-4 bg-white border-2 border-slate-200 rounded-2xl font-black text-sm group-hover:bg-teal-600 group-hover:text-white group-hover:border-teal-600 transition-all shadow-sm">Start Swap Session</button>
               </div>
             ))}
          </div>
