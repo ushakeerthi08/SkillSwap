@@ -29,7 +29,14 @@ const INITIAL_USER: UserProfile = {
   totalSwaps: 8,
   avatar: 'https://i.pravatar.cc/150?u=jamie',
   education: [
-    { school: 'Central Polytech', degree: 'B.Des', field: 'Interaction Design', startYear: '2021', endYear: '2025' }
+    { 
+      school: 'Central Polytech', 
+      degree: 'B.Des', 
+      field: 'Interaction Design', 
+      startYear: '2021', 
+      endYear: '2025',
+      description: 'Specializing in generative art and motion graphics. Recipient of the Dean\'s Excellence Award for innovative UI systems.'
+    }
   ],
   portfolio: [
     { 

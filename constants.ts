@@ -65,7 +65,14 @@ export const MOCK_USERS: UserProfile[] = [
     githubUrl: 'https://github.com/arivera-dev',
     linkedInUrl: 'https://linkedin.com/in/alexrivera',
     education: [
-      { school: 'Tech State University', degree: 'Bachelor of Science', field: 'Computer Science', startYear: '2020', endYear: '2024' }
+      { 
+        school: 'Tech State University', 
+        degree: 'Bachelor of Science', 
+        field: 'Computer Science', 
+        startYear: '2020', 
+        endYear: '2024',
+        description: 'Focused on distributed systems and cryptography. Lead developer for the university\'s open-source club.'
+      }
     ],
     portfolio: [
       { title: 'OS Kernel Mod', description: 'Contributor to a custom Linux kernel optimization project.', imageUrl: 'https://images.unsplash.com/photo-1518433278993-0a7df1849bc2?w=400&h=250&fit=crop', tags: ['C++', 'Kernel'] }
@@ -101,7 +108,14 @@ export const MOCK_USERS: UserProfile[] = [
     linkedInUrl: 'https://linkedin.com/in/schen-art',
     instagramUrl: 'https://instagram.com/sarahchen_pixels',
     education: [
-      { school: 'Academy of Art', degree: 'Master of Fine Arts', field: 'Digital Media', startYear: '2018', endYear: '2022' }
+      { 
+        school: 'Academy of Art', 
+        degree: 'Master of Fine Arts', 
+        field: 'Digital Media', 
+        startYear: '2018', 
+        endYear: '2022',
+        description: 'Thesis focused on accessible design for neurodivergent users. Awarded "Best Graduate Portfolio" in 2022.'
+      }
     ],
     portfolio: [
       { title: 'EcoRoots Branding', description: 'Brand identity for a sustainable farming collective.', imageUrl: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop', tags: ['Branding', 'Figma'] }
@@ -133,7 +147,14 @@ export const MOCK_USERS: UserProfile[] = [
     avatar: 'https://i.pravatar.cc/150?u=marcus',
     instagramUrl: 'https://instagram.com/marcusthorne_vlogs',
     education: [
-      { school: 'Global Business School', degree: 'BBA', field: 'Marketing', startYear: '2021', endYear: '2025' }
+      { 
+        school: 'Global Business School', 
+        degree: 'BBA', 
+        field: 'Marketing', 
+        startYear: '2021', 
+        endYear: '2025',
+        description: 'Minor in psychology. President of the Digital Marketing Association.'
+      }
     ],
     portfolio: [],
     timeSpentTotal: 12,
@@ -163,7 +184,14 @@ export const MOCK_USERS: UserProfile[] = [
     avatar: 'https://i.pravatar.cc/150?u=elena',
     githubUrl: 'https://github.com/elena-codes',
     education: [
-      { school: 'Tech State University', degree: 'B.S.', field: 'Software Engineering', startYear: '2022', endYear: '2026' }
+      { 
+        school: 'Tech State University', 
+        degree: 'B.S.', 
+        field: 'Software Engineering', 
+        startYear: '2022', 
+        endYear: '2026',
+        description: 'Focusing on cross-platform frameworks and UX research. Active contributor to 3 major mobile OS libraries.'
+      }
     ],
     portfolio: [
       { title: 'FitPulse App', description: 'A mobile fitness tracker with social features.', imageUrl: 'https://images.unsplash.com/photo-1510070112810-d4e9a46d9e91?w=400&h=250&fit=crop', tags: ['React Native', 'Mobile'] }

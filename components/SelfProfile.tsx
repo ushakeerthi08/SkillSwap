@@ -246,6 +246,32 @@ const SelfProfile: React.FC<SelfProfileProps> = ({ user, onUpdateUser }) => {
             )}
           </section>
 
+          {/* Education Details Section */}
+          <section className="bg-white p-12 rounded-[3.5rem] border border-slate-100 shadow-xl">
+            <h3 className="text-2xl font-black text-slate-800 mb-8 flex items-center gap-4">
+              <span className="w-2 h-8 bg-teal-500 rounded-full"></span>
+              Academic Journey
+            </h3>
+            <div className="space-y-10">
+              {user.education.map((edu, idx) => (
+                <div key={idx} className="relative pl-10">
+                  <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-slate-100"></div>
+                  <div className="absolute left-[-5px] top-2 w-[12px] h-[12px] rounded-full bg-teal-500 shadow-lg shadow-teal-500/20"></div>
+                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-2">
+                    <h4 className="text-xl font-black text-slate-800">{edu.school}</h4>
+                    <span className="text-xs font-black text-slate-400 uppercase tracking-widest bg-slate-50 px-3 py-1 rounded-full">{edu.startYear} - {edu.endYear}</span>
+                  </div>
+                  <p className="text-teal-600 font-bold mb-3">{edu.degree} in {edu.field}</p>
+                  {edu.description && (
+                    <p className="text-slate-500 text-sm leading-relaxed italic bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+                      {edu.description}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+
           {/* Time Analytics */}
           <section className="bg-white p-12 rounded-[3.5rem] border border-slate-100 shadow-xl">
             <h3 className="text-2xl font-black text-slate-800 mb-8 flex items-center gap-4">

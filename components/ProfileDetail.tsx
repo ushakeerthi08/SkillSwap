@@ -115,6 +115,11 @@ const ProfileDetail: React.FC<ProfileDetailProps> = ({ user, currentUser, onBack
                       <h4 className="text-2xl font-black text-slate-800">{edu.school}</h4>
                       <p className="text-teal-600 font-bold">{edu.degree} in {edu.field}</p>
                       <p className="text-slate-400 text-sm font-bold mt-1">{edu.startYear} - {edu.endYear}</p>
+                      {edu.description && (
+                        <p className="mt-4 text-slate-500 text-sm leading-relaxed border-l-4 border-slate-100 pl-4 py-1">
+                          {edu.description}
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}
